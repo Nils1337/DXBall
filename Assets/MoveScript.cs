@@ -22,6 +22,6 @@ public class MoveScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        print("Collision!\n");
+        //print("MUH");
     }
 }

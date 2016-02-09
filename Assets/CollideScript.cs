@@ -18,22 +18,24 @@ public class CollideScript : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
+        print("MUH");
         if (col.gameObject.name == "Ball")
         {
-            ContactPoint2D[] points = col.contacts;
-            int middle = points.Length / 2;
-            ContactPoint2D point = points[middle];
-            float x = point.point.x - gameObject.transform.position.x;
+            
+            float x = col.transform.position.x - gameObject.transform.position.x;
             float y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow(x, 2));
             Vector2 vec = new Vector2(x, y);
 
-            Vector2 oldVel = col.rigidbody.velocity;
+            Vector2 oldVel = col.attachedRigidbody.velocity;
             float oldLength = Mathf.Sqrt(Mathf.Pow(oldVel.x, 2) + Mathf.Pow(oldVel.y, 2));
             Vector2 nvec = vec.normalized;
             Vector2 newVel = nvec * oldLength * velocityChangeRate;
-            col.rigidbody.velocity = newVel;
+            col.attachedRigidbody.velocity = newVel;
+
+            print( "Old Velocity: " + oldVel.magnitude + "\n" +
+                "New Velocity: " + newVel.magnitude);
         }
 
     }

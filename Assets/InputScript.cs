@@ -11,6 +11,6 @@ public class InputScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float h = Input.GetAxis("Horizontal");
-        rigidBody.velocity = new Vector2(h*3, 0);
+        rigidBody.velocity = new Vector2(h*6, 0);
 	}
 }
