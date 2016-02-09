@@ -6,8 +6,6 @@ public class InputScript : MonoBehaviour {
     public Rigidbody2D rigidBody;
 	// Use this for initialization
 	void Start () {
-        rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        //rigidBody.velocity = new Vector2(1, 0);
 	}
 	
 	// Update is called once per frame
