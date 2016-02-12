@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CollideScript : MonoBehaviour {
+public class SchieberCollisionScript : MonoBehaviour {
 
     private float breite;
     private float radius;
     public float velocityChangeRate;
+    public float maxVelocity;
 	// Use this for initialization
 	void Start () {
 	    breite = gameObject.GetComponent<BoxCollider2D>().bounds.size.x;
@@ -20,7 +21,6 @@ public class CollideScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        print("MUH");
         if (col.gameObject.name == "Ball")
         {
             
@@ -29,12 +29,16 @@ public class CollideScript : MonoBehaviour {
             Vector2 vec = new Vector2(x, y);
 
             Vector2 oldVel = col.attachedRigidbody.velocity;
-            float oldLength = Mathf.Sqrt(Mathf.Pow(oldVel.x, 2) + Mathf.Pow(oldVel.y, 2));
+            float oldLength = oldVel.magnitude;
             Vector2 nvec = vec.normalized;
-            Vector2 newVel = nvec * oldLength * velocityChangeRate;
+            Vector2 newVel = nvec * oldLength;
+            if (newVel.magnitude * velocityChangeRate <= maxVelocity)
+            {
+                newVel *= velocityChangeRate;
+            }
             col.attachedRigidbody.velocity = newVel;
 
-            print( "Old Velocity: " + oldVel.magnitude + "\n" +
+            print( "Schieber Collision\nOld Velocity: " + oldVel.magnitude + "\n" +
                 "New Velocity: " + newVel.magnitude);
         }
 

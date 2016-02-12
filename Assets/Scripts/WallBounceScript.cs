@@ -25,5 +25,8 @@ public class WallBounceScript : MonoBehaviour {
 
         Vector2 newVel = oldVel - 2 * (Vector2.Dot(oldVel,normal)) * normal;
         col.attachedRigidbody.velocity = newVel;
+
+        print("Wall Collision\nOld Velocity: " + oldVel.magnitude + "\n" +
+        "New Velocity: " + newVel.magnitude);
     }
 }
